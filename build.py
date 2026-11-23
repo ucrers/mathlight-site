@@ -1,7 +1,14 @@
 """Builds Mathlight's support, privacy and legal pages in English, German and Turkish."""
 
-BADGE = '<svg viewBox="0 0 32 32"><path d="M16 5v4M7 9l2.5 2.5M25 9l-2.5 2.5M9 22h14M11 26h10M12 18a5 5 0 1 1 8 0c-1 1-1.5 2-1.5 4h-5c0-2-.5-3-1.5-4z"/></svg>'
 TICK = '<div class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></div>'
+# Floating tiles behind the page, like the cubes and x boxes in the app:
+# (top %, side, how far out from the content 0–1, kind, size px, turn deg).
+TILES = ''.join(f'<i class="{side} {kind}" style="top:{top}%;--o:{out};--s:{size}px;--r:{turn}deg"></i>' for top, side, out, kind, size, turn in [
+    (5, 'l', 0.3, 'cube', 22, -12), (11, 'r', 0.7, 'x', 32, 10), (19, 'l', 0.85, 'cube', 14, -20),
+    (27, 'r', 0.2, 'cube', 26, 6), (33, 'l', 0.55, 'cube', 18, 18), (45, 'l', 0.15, 'x', 28, -8),
+    (52, 'r', 0.5, 'cube', 22, -6), (60, 'l', 0.7, 'cube', 34, 12), (67, 'r', 0.8, 'x', 20, 16),
+    (74, 'l', 0.35, 'cube', 16, -10), (81, 'r', 0.3, 'cube', 30, 4), (89, 'l', 0.6, 'cube', 20, -16),
+])
 EMAIL = '<span class="email">ucar.ersin@outlook.de</span>'
 ADDRESS = 'Ersin Ucar, Körnerstr. 27, 47166 Duisburg'
 
@@ -43,14 +50,14 @@ def page(lang, kind, title, lead, description, card_title, card, body):
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="tiles" aria-hidden="true">{TILES}</div>
 <main>
   <header>
-    <div class="badge" aria-hidden="true">
-      {BADGE}
-    </div>
+    <img class="icon" src="icon.png" alt="" width="64" height="64">
     <div>
       <h1>{title}</h1>
       <p class="lead">{lead}</p>
+      <div class="cubes" aria-hidden="true"><i class="x"></i><i></i><i></i><i></i></div>
     </div>
   </header>
 
